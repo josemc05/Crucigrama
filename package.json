@@ -1,0 +1,25 @@
+{
+  "name": "crucigrama",
+  "version": "1.0.0",
+  "description": "I built this crossword puzzle to provide an enhanced, more intuitive user experience with javascript.",
+  "main": "index.js",
+  "scripts": {
+    "start": "node src/app.js",
+    "dev": "nodemon src/app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/josemc05/Crucigrama.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/josemc05/Crucigrama/issues"
+  },
+  "homepage": "https://github.com/josemc05/Crucigrama#readme",
+  "dependencies": {
+    "ejs": "^3.1.8",
+    "express": "^4.18.2"
+  }
+}
