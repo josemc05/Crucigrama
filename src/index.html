@@ -11,6 +11,7 @@
 	<script type="application/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
 	<script type="application/javascript" src="js/jquery.crossword.js"></script>
 	<script type="application/javascript" src="js/script.js"></script>
+	
 
 	<style type="text/css" media="screen">
 	/*
@@ -95,10 +96,29 @@
 	</style>
 
 </head>
-
+<button id="boton">presioname</button>
 <body>
 	
 <div id="puzzle-wrapper"><!-- crossword puzzle appended here --></div>
 
 </body>
+
+<script>
+	const btn = document.getElementById("boton")
+	const url = 'http://localhost:3000/info'
+	btn.addEventListener('click', getEjemplo)
+	async function getEjemplo(){
+		const res = await fetch(url,{
+			method: 'GET'
+		})
+		const data = await res.json()
+		console.log(data[0].id)
+	}
+	
+	getEjemplo()
+
+	
+
+
+</script>
 </html>	

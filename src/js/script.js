@@ -1,5 +1,6 @@
+console.log('estamos arriba, antes de la funcion')
 
-
+function crucigramas(){	
 (function($) {
 	$(function() {
 		// provide crossword entries in an array of objects like the following example
@@ -159,3 +160,9 @@
 	})
 	
 })(jQuery)
+}
+
+crucigramas()
+
+
+
