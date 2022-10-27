@@ -12,8 +12,8 @@ return data}
 const b = Promise.resolve(getEjemplo(a)) //variable que resuelve y almacena la funcion
 
 b.then(value => {//Aqui se pueden traer los valores bien para manejarlos y colocar logica dentro
-	console.log(value[1].pregunta);
-	crucigramas()
+	//console.log(value[1].pregunta);
+	crucigramas(value)
 	console.log('Esto se imprime dentro del valor del promise')
 
   }).catch(err => {
@@ -25,22 +25,22 @@ b.then(value => {//Aqui se pueden traer los valores bien para manejarlos y coloc
 
 
 
-function crucigramas(){	
+function crucigramas(pruebaDato){	
 (function($) {
 	$(function() {
 		// provide crossword entries in an array of objects like the following example
 		// Position refers to the numerical order of an entry. Each position can have 
 		// two entries: an across entry and a down entry.
-
+		console.log(pruebaDato[1].pregunta+'dentro de crucigramas')
 		
 		var puzzleData = [
 			 	{
-					clue: "parte del pez",
-					answer: "aleta",
-					position: 1,
+					clue: pruebaDato[1].pregunta,
+					answer: pruebaDato[1].respuesta,
+					position: pruebaDato[1].position,
 					orientation: "across",
-					startx: 1,
-					starty: 1
+					startx: pruebaDato[1].posX,
+					starty: pruebaDato[1].posY
 				},
 			 	{
 					clue: "medicina",
