@@ -1,25 +1,29 @@
-console.log('estamos arriba, antes de la funcion')
 const url = 'http://localhost:3000/info'
-let dataName = [];
-let request = async () => {
-const response = await fetch('http://localhost:3000/info');
-const data = await response.json();
-dataName = data;
-console.log(data)
-}
 
-let a = 4
-let b= ''
-async function getEjemplo(a){
+let a = 4//ejemplo
+
+async function getEjemplo(a){ //Funcion asincrona que trae la consulta de la bd
 	const res = await fetch(url,{
 		method: 'GET'
 	})
 	const data = await res.json()
-	console.log(data)
-	
-return data[a].pregunta}
-b=getEjemplo(a)
-console.log(b)
+return data}
+
+const b = Promise.resolve(getEjemplo(a)) //variable que resuelve y almacena la funcion
+
+b.then(value => {//Aqui se pueden traer los valores bien para manejarlos y colocar logica dentro
+	console.log(value[1].pregunta);
+	crucigramas()
+	console.log('Esto se imprime dentro del valor del promise')
+
+  }).catch(err => {
+	console.log(err);
+  });
+
+
+/////////////////
+
+
 
 function crucigramas(){	
 (function($) {
@@ -183,7 +187,7 @@ function crucigramas(){
 })(jQuery)
 }
 
-crucigramas()
+// crucigramas()
 
 
 
