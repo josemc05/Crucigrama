@@ -1,4 +1,25 @@
 console.log('estamos arriba, antes de la funcion')
+const url = 'http://localhost:3000/info'
+let dataName = [];
+let request = async () => {
+const response = await fetch('http://localhost:3000/info');
+const data = await response.json();
+dataName = data;
+console.log(data)
+}
+
+let a = 4
+let b= ''
+async function getEjemplo(a){
+	const res = await fetch(url,{
+		method: 'GET'
+	})
+	const data = await res.json()
+	console.log(data)
+	
+return data[a].pregunta}
+b=getEjemplo(a)
+console.log(b)
 
 function crucigramas(){	
 (function($) {

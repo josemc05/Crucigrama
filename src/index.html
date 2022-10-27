@@ -104,21 +104,9 @@
 </body>
 
 <script>
-	const btn = document.getElementById("boton")
-	const url = 'http://localhost:3000/info'
-	btn.addEventListener('click', getEjemplo)
-	async function getEjemplo(){
-		const res = await fetch(url,{
-			method: 'GET'
-		})
-		const data = await res.json()
-		console.log(data[0].id)
-	}
-	
-	getEjemplo()
+
 
 	
-
-
+	
 </script>
 </html>	
