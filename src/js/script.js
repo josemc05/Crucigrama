@@ -1,184 +1,76 @@
 const url = 'http://localhost:3000/info'
+let modulo = 0
 
-let a = 4//ejemplo
 
-async function getEjemplo(a){ //Funcion asincrona que trae la consulta de la bd
+function getRandomInt(max) {//Funcion que genera numero aleatorio entre 1 y 2
+	let alternativa=0
+	alternativa=Math.floor(Math.random() * max);
+	while(alternativa==0){
+		alternativa=Math.floor(Math.random() * max);
+	}
+  return alternativa}
+
+
+
+function setModulo1(){
+modulo=1
+b.then(value => {//Aqui se pueden traer los valores bien para manejarlos y colocar logica dentro
+	crucigramas(value, modulo, getRandomInt(3))
+	console.log('Esto se imprime dentro del valor del promise')
+  }).catch(err => {
+	console.log(err);
+  });
+}
+
+function setModulo2(){
+	modulo=2
+	console.log(modulo)
+	b.then(value => {//Aqui se pueden traer los valores bien para manejarlos y colocar logica dentro
+		//console.log(value[1].pregunta);
+		crucigramas(value)
+		console.log('Esto se imprime dentro del valor del promise')
+	  }).catch(err => {
+		console.log(err);
+	  });
+	}
+
+async function getEjemplo(){ //Funcion asincrona que trae la consulta de la bd
 	const res = await fetch(url,{
 		method: 'GET'
 	})
 	const data = await res.json()
 return data}
 
-const b = Promise.resolve(getEjemplo(a)) //variable que resuelve y almacena la funcion
-
-b.then(value => {//Aqui se pueden traer los valores bien para manejarlos y colocar logica dentro
-	//console.log(value[1].pregunta);
-	crucigramas(value)
-	console.log('Esto se imprime dentro del valor del promise')
-
-  }).catch(err => {
-	console.log(err);
-  });
-
-
-/////////////////
+const b = Promise.resolve(getEjemplo()) //variable que resuelve y almacena la funcion
 
 
 
-function crucigramas(pruebaDato){	
+
+/////////////////FUNCION DE CREA EL CRUCIGRAMA/////////////////
+
+
+function crucigramas(pruebaDatos, modulos, alternativas){	
 (function($) {
 	$(function() {
 		// provide crossword entries in an array of objects like the following example
 		// Position refers to the numerical order of an entry. Each position can have 
 		// two entries: an across entry and a down entry.
-		console.log(pruebaDato[1].pregunta+'dentro de crucigramas')
-		
-		var puzzleData = [
-			 	{
-					clue: pruebaDato[1].pregunta,
-					answer: pruebaDato[1].respuesta,
-					position: pruebaDato[1].position,
-					orientation: "across",
-					startx: pruebaDato[1].posX,
-					starty: pruebaDato[1].posY
-				},
-			 	{
-					clue: "medicina",
-					answer: "margarita",
-					position: 3,
-					orientation: "across",
-					startx: 7,
-					starty: 1
-				},
-				{
-					clue: "Created from a separation of charge",
-					answer: "capacitance",
-					position: 5,
-					orientation: "across",
-					startx: 1,
-					starty: 3
-				},
-				{
-					clue: "The speeds of engines without and accelaration",
-					answer: "idlespeeds",
-					position: 8,
-					orientation: "across",
-					startx: 1,
-					starty: 5
-				},
-				{
-					clue: "Complex resistances",
-					answer: "impedances",
-					position: 10,
-					orientation: "across",	
-					startx: 2,
-					starty: 7
-				},
-				{
-					clue: "This device is used to step-up, step-down, and/or isolate",
-					answer: "transformer",
-					position: 13,
-					orientation: "across",
-					startx: 1,
-					starty: 9
-				},
-				{
-					clue: "Type of ray emitted frm the sun",
-					answer: "gamma",
-					position: 16,
-					orientation: "across",
-					startx: 1,
-					starty: 11
-				},
-				{
-					clue: "C programming language operator",
-					answer: "cysan",
-					position: 17,
-					orientation: "across",
-					startx: 7,
-					starty: 11
-				},
-				{
-					clue: "Defines the alpha-numeric characters that are typically associated with text used in programming",
-					answer: "ascii",
-					position: 1,
-					orientation: "down",
-					startx: 1,
-					starty: 1
-				},
-				{
-					clue: "Generally, if you go over 1kV per cm this happens",
-					answer: "arc",
-					position: 2,
-					orientation: "down",
-					startx: 5,
-					starty: 1
-				},
-				{
-					clue: "Control system strategy that tries to replicate the human through process (abbr.)",
-					answer: "ann",
-					position: 4,
-					orientation: "down",
-					startx: 9,
-					starty: 1
-				},
-				{
-					clue: "Greek variable that usually describes rotor positon",
-					answer: "theta",
-					position: 6,
-					orientation: "down",
-					startx: 7,
-					starty: 3
-				},
-				{
-					clue: "Electromagnetic (abbr.)",
-					answer: "em",
-					position: 7,
-					orientation: "down",
-					startx: 11,
-					starty: 3
-				},
-				{
-					clue: "No. 13 across does this to a voltage",
-					answer: "steps",
-					position: 9,
-					orientation: "down",
-					startx: 5,
-					starty: 5
-				},
-				{
-					clue: "Emits a lout wailing sound",
-					answer: "siren",
-					position: 11,
-					orientation: "down",
-					startx: 11,
-					starty: 7
-				},
-				{
-					clue: "Information technology (abbr.)",
-					answer: "it",
-					position: 12,
-					orientation: "down",
-					startx: 1,
-					starty: 8
-				},
-				{
-					clue: "Asynchronous transfer mode (abbr.)",
-					answer: "atm",
-					position: 14,
-					orientation: "down",
-					startx: 3,
-					starty: 9
-				},
-				{
-					clue: "Offset current control (abbr.)",
-					answer: "occ",
-					position: 15,
-					orientation: "down",
-					startx: 7,
-					starty: 9
-				}
-			] 
+		var puzzleData=[] //declaramos arreglo con los datos de las preguntas
+		let contador=0 //establecemos contador
+		pruebaDatos.forEach(pruebaDato => { //llenamos el arreglo con la informacion de la base de datos
+			if(pruebaDatos[contador].modulo==modulos  && pruebaDatos[contador].alt==alternativas){
+				puzzleData.push({
+					clue: pruebaDatos[contador].pregunta,
+						answer: pruebaDatos[contador].respuesta,
+						position: pruebaDatos[contador].position,
+						orientation: "down",
+						startx: pruebaDatos[contador].posX,
+						starty: pruebaDatos[contador].posY
+				})
+				contador+=1
+			}else{
+			}	
+		});
 	
 		$('#puzzle-wrapper').crossword(puzzleData);
 		
