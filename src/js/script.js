@@ -13,9 +13,8 @@ function getRandomInt(max) {//Funcion que genera numero aleatorio entre 1 y 2
 
 
 function setModulo1(){
-modulo=1
 b.then(value => {//Aqui se pueden traer los valores bien para manejarlos y colocar logica dentro
-	crucigramas(value, modulo, getRandomInt(3))
+	crucigramas(value, 1, getRandomInt(3))
 	console.log('Esto se imprime dentro del valor del promise')
   }).catch(err => {
 	console.log(err);
@@ -23,11 +22,9 @@ b.then(value => {//Aqui se pueden traer los valores bien para manejarlos y coloc
 }
 
 function setModulo2(){
-	modulo=2
-	console.log(modulo)
 	b.then(value => {//Aqui se pueden traer los valores bien para manejarlos y colocar logica dentro
 		//console.log(value[1].pregunta);
-		crucigramas(value)
+		crucigramas(value, 2, 1)
 		console.log('Esto se imprime dentro del valor del promise')
 	  }).catch(err => {
 		console.log(err);
@@ -59,6 +56,7 @@ function crucigramas(pruebaDatos, modulos, alternativas){
 		let contador=0 //establecemos contador
 		pruebaDatos.forEach(pruebaDato => { //llenamos el arreglo con la informacion de la base de datos
 			if(pruebaDatos[contador].modulo==modulos  && pruebaDatos[contador].alt==alternativas){
+				console.log("entra aqui")
 				puzzleData.push({
 					clue: pruebaDatos[contador].pregunta,
 						answer: pruebaDatos[contador].respuesta,
