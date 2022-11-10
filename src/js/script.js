@@ -1,7 +1,6 @@
 const url = 'http://localhost:3000/info'
 let modulo = 0
 
-
 function getRandomInt(max) {//Funcion que genera numero aleatorio entre 1 y 2
 	let alternativa=0
 	alternativa=Math.floor(Math.random() * max);
@@ -10,37 +9,57 @@ function getRandomInt(max) {//Funcion que genera numero aleatorio entre 1 y 2
 	}
   return alternativa}
 
-
+//setModulo1()//Coloca el crucigrama 1 de predeterminado
 
 function setModulo1(){
-b.then(value => {//Aqui se pueden traer los valores bien para manejarlos y colocar logica dentro
-	crucigramas(value, 1, getRandomInt(3))
-	console.log('Esto se imprime dentro del valor del promise')
-  }).catch(err => {
-	console.log(err);
-  });
-}
-
-function setModulo2(){
-	b.then(value => {//Aqui se pueden traer los valores bien para manejarlos y colocar logica dentro
-		//console.log(value[1].pregunta);
-		crucigramas(value, 2, 1)
-		console.log('Esto se imprime dentro del valor del promise')
-	  }).catch(err => {
-		console.log(err);
-	  });
+	if (document.getElementById("puzzle-wrapper").innerHTML==''){
+		b.then(value => {//Aqui se pueden traer los valores bien para manejarlos y colocar logica dentro
+			console.log(value)
+			crucigramas(value, 1, 1)
+			console.log('Esto se imprime dentro del valor del promise')
+		  }).catch(err => {
+			console.log(err);
+		  });
+		}else{//Limpia la pantalla en caso de que haya ya un crucigrama y crea uno nuevo
+			document.getElementById("puzzle-wrapper").innerHTML=''
+			document.getElementById("puzzle-clues").innerHTML=''
+			setModulo1();
+		}
 	}
 
-async function getEjemplo(){ //Funcion asincrona que trae la consulta de la bd
+	
+function setModulo2(){
+	if (document.getElementById("puzzle-wrapper").innerHTML==''){
+		b.then(value => {//Aqui se pueden traer los valores bien para manejarlos y colocar logica dentro
+			console.log(value);
+			crucigramas(value, 2, 1)
+			console.log('Esto se imprime dentro del valor del promise')
+		  }).catch(err => {
+			console.log(err);
+		  });
+		}else{//Limpia la pantalla en caso de que haya ya un crucigrama y crea uno nuevo
+			document.getElementById("puzzle-wrapper").innerHTML=''
+			document.getElementById("puzzle-clues").innerHTML=''
+			setModulo2();
+		}
+	}
+
+async function getModulo(){ //Funcion asincrona que trae la consulta de la bd
 	const res = await fetch(url,{
 		method: 'GET'
 	})
 	const data = await res.json()
 return data}
 
-const b = Promise.resolve(getEjemplo()) //variable que resuelve y almacena la funcion
+const b = Promise.resolve(getModulo())//variable que resuelve y almacena la funcion
 
-
+window.onload= b.then(value => {//Aqui se pueden traer los valores bien para manejarlos y colocar logica dentro
+	console.log(value)
+	crucigramas(value, 1, 1)
+	console.log('Esto se imprime dentro del valor del promise')
+  }).catch(err => {
+	console.log(err);
+  });
 
 
 /////////////////FUNCION DE CREA EL CRUCIGRAMA/////////////////
@@ -53,20 +72,22 @@ function crucigramas(pruebaDatos, modulos, alternativas){
 		// Position refers to the numerical order of an entry. Each position can have 
 		// two entries: an across entry and a down entry.
 		var puzzleData=[] //declaramos arreglo con los datos de las preguntas
-		let contador=0 //establecemos contador
+		let contador=0
+		console.log(pruebaDatos.length) //establecemos contador
 		pruebaDatos.forEach(pruebaDato => { //llenamos el arreglo con la informacion de la base de datos
 			if(pruebaDatos[contador].modulo==modulos  && pruebaDatos[contador].alt==alternativas){
 				console.log("entra aqui")
 				puzzleData.push({
-					clue: pruebaDatos[contador].pregunta,
+						clue: pruebaDatos[contador].pregunta,
 						answer: pruebaDatos[contador].respuesta,
 						position: pruebaDatos[contador].position,
-						orientation: "down",
+						orientation: pruebaDatos[contador].orientation,
 						startx: pruebaDatos[contador].posX,
 						starty: pruebaDatos[contador].posY
 				})
 				contador+=1
 			}else{
+				contador+=1
 			}	
 		});
 	
