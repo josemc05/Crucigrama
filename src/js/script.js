@@ -15,7 +15,7 @@ function setModulo1(){
 	if (document.getElementById("puzzle-wrapper").innerHTML==''){
 		b.then(value => {//Aqui se pueden traer los valores bien para manejarlos y colocar logica dentro
 			console.log(value)
-			crucigramas(value, 1, 1)
+			crucigramas(value, 1, getRandomInt(3))
 			console.log('Esto se imprime dentro del valor del promise')
 		  }).catch(err => {
 			console.log(err);
@@ -32,7 +32,7 @@ function setModulo2(){
 	if (document.getElementById("puzzle-wrapper").innerHTML==''){
 		b.then(value => {//Aqui se pueden traer los valores bien para manejarlos y colocar logica dentro
 			console.log(value);
-			crucigramas(value, 2, 1)
+			crucigramas(value, 2, getRandomInt(3))
 			console.log('Esto se imprime dentro del valor del promise')
 		  }).catch(err => {
 			console.log(err);
@@ -55,8 +55,7 @@ const b = Promise.resolve(getModulo())//variable que resuelve y almacena la func
 
 window.onload= b.then(value => {//Aqui se pueden traer los valores bien para manejarlos y colocar logica dentro
 	console.log(value)
-	crucigramas(value, 1, 1)
-	console.log('Esto se imprime dentro del valor del promise')
+	crucigramas(value, 1, getRandomInt(3))
   }).catch(err => {
 	console.log(err);
   });
@@ -68,12 +67,9 @@ window.onload= b.then(value => {//Aqui se pueden traer los valores bien para man
 function crucigramas(pruebaDatos, modulos, alternativas){	
 (function($) {
 	$(function() {
-		// provide crossword entries in an array of objects like the following example
-		// Position refers to the numerical order of an entry. Each position can have 
-		// two entries: an across entry and a down entry.
 		var puzzleData=[] //declaramos arreglo con los datos de las preguntas
 		let contador=0
-		console.log(pruebaDatos.length) //establecemos contador
+		//establecemos contador
 		pruebaDatos.forEach(pruebaDato => { //llenamos el arreglo con la informacion de la base de datos
 			if(pruebaDatos[contador].modulo==modulos  && pruebaDatos[contador].alt==alternativas){
 				console.log("entra aqui")
@@ -98,7 +94,6 @@ function crucigramas(pruebaDatos, modulos, alternativas){
 })(jQuery)
 }
 
-// crucigramas()
 
 
 
